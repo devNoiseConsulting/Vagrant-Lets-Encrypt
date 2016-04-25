@@ -1,0 +1,24 @@
+---
+- name: Installs Let's Encrypt dependancies
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+  - python
+  - python-dev
+  - python-virtualenv
+  - gcc
+  - dialog
+  - libaugeas0
+  - augeas-lenses
+  - libssl-dev
+  - libffi-dev
+  - ca-certificates
+  tags: letsEncrypt
+
+- name: Install Let's Encrypt
+  git:
+    repo=https://github.com/letsencrypt/letsencrypt
+    dest=/home/vagrant/share/letsencrypt
+  tags: letsEncrypt

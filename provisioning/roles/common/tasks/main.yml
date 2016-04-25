@@ -1,0 +1,27 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    upgrade: safe
+  tags: common
+
+- name: Update language
+  apt:
+    name: language-pack-en
+  tags: common
+
+- name: Installs common utilities for development
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+  - build-essential
+  - sudo
+  - procps
+  - wget
+  - curl
+  - vim
+  - git
+  - unzip
+  tags: common
